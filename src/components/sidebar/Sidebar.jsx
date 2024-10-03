@@ -77,6 +77,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import GroupsIcon from '@mui/icons-material/Groups';
 import { Users } from "../../dummyData"; // Import your dummy data
+import CloseFriend from "../closefriend/closefriend";
 
 export default function Sidebar() {
     return (
@@ -123,12 +124,8 @@ export default function Sidebar() {
                 <button className="sidebarButton">Show More</button>
                 <hr className="sidebarHr" />
                 <ul className="sidebarFriendList">
-                    {/* Dynamically render friends from the Users array */}
-                    {Users.map(user => (
-                        <li key={user.id} className="sidebarFriend">
-                            <img className="sidebarFriendImg" src={user.profilePicture} alt="" />
-                            <span className="sidebarFriendName">{user.username}</span>
-                        </li>
+                    {Users.map((u) => (
+                        <CloseFriend key={u.id} user={u} />
                     ))}
                 </ul>
             </div>

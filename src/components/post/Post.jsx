@@ -1,13 +1,23 @@
-import React from 'react';
+
 import './post.css';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Users } from '../../dummyData'; // Importing Users data
+import { useState } from 'react';
+
 
 export default function Post({ post }) {
+  const[like,setLike] = useState(post.like)
+  const[isliked,setIsLike] = useState(false)
+
+  const likeHandler = () => {
+    setLike(isliked ? like-1 : like+1)
+    setIsLike(!isliked)
+  }
   // Find the user with the matching userId from the post
   const user = Users.find((u) => u.id === post.userId);
 
   return (
+   
     <div className='post'>
       <div className='postWrapper'>
         <div className='postTop'>
@@ -30,9 +40,9 @@ export default function Post({ post }) {
         </div>
         <div className='PostBottom'>
           <div className='postBottomLeft'>
-            <img className='likeIcon' src="/assets/like.png" alt="Like Icon" />
-            <img className='likeIcon' src="/assets/heart.png" alt="Heart Icon" />
-            <span className='postLikeCounter'>{post.like} people liked this</span> {/* Dynamic likes */}
+            <img className='likeIcon' src="/assets/like.png" onClick={likeHandler} alt="Like Icon" />
+            <img className='likeIcon' src="/assets/heart.png" onClick={likeHandler} alt="Heart Icon" />
+            <span className='postLikeCounter'>{like} people liked this</span> {/* Dynamic likes */}
           </div>
           <div className='postBottomRight'>
             <span className='postCommentText'>{post.comment} comments</span> {/* Dynamic comments */}
